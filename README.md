@@ -105,6 +105,12 @@ Once opened in your browser:
 
 ---
 
+## prototype of the Noteify
+
+<img src="Static/image/prototype.jpg" width="300">
+
+---
+
 ## Features Overview
 
 | Feature           | Description                                |
