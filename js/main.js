@@ -1,11 +1,3 @@
-// Logout
-const logoutBtn = document.getElementById("logoutBtn");
-logoutBtn.addEventListener("click", () => {
-  localStorage.removeItem("currentUser");
-  alert("You have been logged out!");
-  window.location.href = "login.html";
-});
-
 // Notes functionality
 const addNoteBtn = document.getElementById("addNoteBtn");
 const notesContainer = document.getElementById("notesContainer");
