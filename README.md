@@ -142,6 +142,7 @@ Once opened in your browser:
 | ------------------ | ---------- | ----------------------------- |
 | **Daniel Gashaw**  | ETS0387/16 | https://github.com/Maxd646    |
 | **Abrham Teramed** | ETS0094/16 | https://github.com/Abrom-code |
+| **Addis Shiferaw** | ETS0099/16 | https://github.com/Adda-19    |
 | **Liyuneh Rstey**  | ETS0841/15 | https://github.com/liyuneh    |
 | **Amir Yimam**     | ETS0169/16 | https://github.com/miro129    |
 
