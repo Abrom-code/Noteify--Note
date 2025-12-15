@@ -1,180 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Menu Bar Example</title>
-
-  <!-- Google Icons -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
-
-  <!-- External CSS -->
-  <link rel="stylesheet" href="../css/style.css" />
-  <script src="script.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noteify - Your Smart Note-Taking Companion</title>
+    <meta name="description"
+        content="Noteify is a simple, responsive, and interactive note-taking web application that helps you create, edit, delete, and search notes effortlessly.">
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/index.css">
 </head>
+
 <body>
+    <!-- Navigation Header -->
+    <header class="main-header">
+        <nav class="navbar">
+            <a href="index.html" class="logo">Noteify</a>
+            <div class="nav-links">
+                <a href="index.html" class="active">Home</a>
+                <a href="about.html">About</a>
+                <a href="main.html">Notes App</a>
+                <a href="login.html">Login</a>
+                <a href="signup.html">Sign Up</a>
+            </div>
+        </nav>
+    </header>
 
-  <!-- Menu Bar -->
-  <div class="menu-bar">
-    <div class="menu-item">
-      <button>Home</button>
-      <div class="dropdown">
-        <a href="#">New</a>
-        <a href="#">Open</a>
-        <a href="#">Save</a>
-        <a href="#">Exit</a>
-      </div>
-    </div>
-
-    <div class="menu-item">
-      <button>Edit</button>
-      <div class="dropdown">
-        <a href="#">Undo</a>
-        <a href="#">Redo</a>
-        <a href="#">Cut</a>
-        <a href="#">Copy</a>
-        <a href="#">Paste</a>
-      </div>
-    </div>
-
-    <div class="menu-item">
-      <button>View</button>
-      <div class="dropdown">
-        <a href="#">Zoom In</a>
-        <a href="#">Zoom Out</a>
-        <a href="#">Full-Screen</a>
-      </div>
-    </div>
-
-    <div class="menu-item">
-      <button>Note</button>
-      <div class="dropdown">
-        <a href="#">Add Note</a>
-        <a href="#">Edit Note</a>
-        <a href="#">Delete Note</a>
-      </div>
-    </div>
-
-    <div class="menu-item">
-      <button>Window</button>
-      <div class="dropdown">
-        <a href="#">Minimize</a>
-        <a href="#">Maximize</a>
-        <a href="#">Close</a>
-      </div>
-    </div>
-
-    <div class="menu-item">
-      <button>Tools</button>
-      <div class="dropdown">
-        <a href="#">Options</a>
-        <a href="#">Customize</a>
-        <a href="#">Extensions</a>
-      </div>
-    </div>
-
-    <div class="menu-item">
-      <button>Help</button>
-      <div class="dropdown">
-        <a href="#">Documentation</a>
-        <a href="#">About</a>
-        <a href="#">Support</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Page Layout -->
-  <div class="container">
-
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <button class="notify-btn">Notify</button>
-
-      <!-- Search -->
-      <div class="search-box">
-        <span class="material-symbols-outlined">search</span>
-        <input type="text" placeholder="Search  Ctrl + K">
-      </div>
-
-      <div class="flex-row">
-        <button class="gray-btn">📖 Note</button>
-        <button class="gray-btn icon-btn">
-          <span class="material-symbols-outlined">more_horiz</span>
-        </button>
-      </div>
-
-      <div class="flex-row">
-        <button class="gray-btn half">📋 Task</button>
-        <button class="gray-btn half">📅 Event</button>
-      </div>
-
-      <a href="#" class="update-btn">♑ Update</a>
-
-      <div class="sidebar-links">
-        <div class="link-item"><span class="material-symbols-outlined">folder</span> Files</div>
-        <div class="link-item"><span class="material-symbols-outlined">calendar_month</span> Calendar</div>
-        <div class="link-item"><span class="material-symbols-outlined">description</span> Templates</div>
-        <div class="link-item"><span class="material-symbols-outlined">note</span> Note Books</div>
-        <div class="link-item"><span class="material-symbols-outlined">label</span> Tags</div>
-      </div>
-
-      <button class="upgrade-btn">
-        <span class="material-symbols-outlined">stat_3</span> Upgrade
-      </button>
-    </aside>
-
-    <!-- Main Area -->
-    <main class="main-content">
-
-      <h2>Your Home</h2>
-      <h3>Notes</h3>
-
-      <!-- Notes List -->
-      <section class="notes-grid">
-
-        <div class="note-card">
-          <h4>Daily Notes</h4>
-          <p>Biology > the term biology comes from the greek which means the study of life.</p>
-          <span class="author">Liyuneh Rstey</span>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Welcome to Noteify</h1>
+            <p>Take notes quickly, manage them effortlessly, and keep them safe locally. Designed for simplicity and
+                productivity.</p>
+            <div class="hero-buttons">
+                <a href="signup.html" class="btn btn-primary">Get Started</a>
+                <a href="#" class="btn btn-secondary">Try Demo</a>
+            </div>
         </div>
+    </section>
 
-        <div class="note-card">
-          <h4>First Note Book</h4>
-          <p>Biology > the term biology comes from the greek which means the study of life.</p>
-          <span class="author">Liyuneh Rstey</span>
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2>Why Choose Noteify?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <span class="material-symbols-outlined">note_add</span>
+                    </div>
+                    <h3>Quick Note Creation</h3>
+                    <p>Create notes instantly with our intuitive interface. No complex setup required.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <span class="material-symbols-outlined">search</span>
+                    </div>
+                    <h3>Powerful Search</h3>
+                    <p>Find your notes quickly with our advanced search functionality.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <span class="material-symbols-outlined">storage</span>
+                    </div>
+                    <h3>Local Storage</h3>
+                    <p>Your notes are stored locally for privacy and offline access.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <span class="material-symbols-outlined">palette</span>
+                    </div>
+                    <h3>Customizable</h3>
+                    <p>Organize notes with colors, tags, and categories that work for you.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <span class="material-symbols-outlined">devices</span>
+                    </div>
+                    <h3>Responsive Design</h3>
+                    <p>Works perfectly on desktop, tablet, and mobile devices.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <span class="material-symbols-outlined">dark_mode</span>
+                    </div>
+                    <h3>Dark Mode</h3>
+                    <p>Switch between light and dark themes for comfortable viewing.</p>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <div class="note-card">
-          <h4>Second Note Book</h4>
-          <p>Biology > the term biology comes from the greek which means the study of life.</p>
-          <span class="author">Liyuneh Rstey</span>
+    <!-- Quick Demo Section -->
+    <section class="demo-section">
+        <div class="container">
+            <h2>Try It Now</h2>
+            <p>Get a quick taste of Noteify's functionality</p>
+            <div class="demo-container">
+                <div class="demo-notes">
+                    <div class="demo-header">
+                        <h3>Your Notes</h3>
+                        <button id="addDemoNote" class="btn btn-small">+ Add Note</button>
+                    </div>
+                    <div class="demo-notes-grid" id="demoNotesGrid">
+                        <div class="demo-note">
+                            <h4>Welcome Note</h4>
+                            <p>This is a sample note to show how Noteify works. Click "Add Note" to create your own!</p>
+                            <span class="demo-date">Today</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+    </section>
 
-      </section>
-
-      <!-- Scratch Pad -->
-      <section>
-        <h3>Scratch Pad</h3>
-        <div class="scratch-box">
-          <textarea id="scratch-text" placeholder="Write here ...."></textarea>
-          <span class="author">Liyuneh Rstey</span>
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Get Organized?</h2>
+                <p>Join thousands of users who trust Noteify for their note-taking needs.</p>
+                <div class="cta-buttons">
+                    <a href="signup.html" class="btn btn-primary btn-large">Sign Up Free</a>
+                    <a href="about.html" class="btn btn-outline">Learn More</a>
+                </div>
+            </div>
         </div>
-      </section>
+    </section>
 
-      <hr>
-
-      <!-- Recently Captured -->
-      <section>
-        <h3>Recently Captured</h3>
-        <div class="recent-box">
-          <p>Web Clips</p>
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>Noteify</h3>
+                    <p>Your smart note-taking companion</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Product</h4>
+                        <a href="main.html">Notes App</a>
+                        <a href="about.html">About</a>
+                        <a href="#">Features</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Account</h4>
+                        <a href="login.html">Login</a>
+                        <a href="signup.html">Sign Up</a>
+                        <a href="forget.html">Reset Password</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Support</h4>
+                        <a href="#">Help Center</a>
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>© 2025 Noteify. All rights reserved.</span>
+            </div>
         </div>
-      </section>
+    </footer>
 
-    </main>
-  </div>
-
-  <!-- JS -->
-  
+    <!-- JavaScript -->
+    <script src="../js/index.js"></script>
 </body>
 </html>
