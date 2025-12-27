@@ -5,8 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Noteify</title>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
-
-  <!-- CSS -->
 <link rel="stylesheet" href="../css/main.css">
 </head>
 
@@ -14,23 +12,14 @@
 
   <!-- Top Menu Bar -->
   <div class="menu-bar">
-    <div class="menu-item"><button>Home</button></div>
-    <div class="menu-item"><button>Edit
-      <div class="drop-down">
-        
-      </div>
-    </button></div>
-    <div class="menu-item"><button>View</button></div>
-    <div class="menu-item"><button>Note</button></div>
-    <div class="menu-item"><button>Tools</button></div>
-    <div class="menu-item"><button>Help</button></div>
+    <div class="menu-item" style="margin-left: auto;"><button onclick="logout()" class="logout-btn">Logout</button></div>
   </div>
 
   <div class="container">
     
     <!-- Sidebar -->
     <aside class="sidebar">
-      <button class="notify-btn">Notify</button>
+      <a href="index.html"><button class="notify-btn">Notify</button></a>
 
       <div class="search-box">
         <span class="material-symbols-outlined">search</span>
@@ -42,21 +31,69 @@
       <div class="sidebar-links">
         <div class="link-item"><span class="material-symbols-outlined">folder</span> Files</div>
         <div class="link-item"><span class="material-symbols-outlined">calendar_month</span> Calendar</div>
-        <div class="link-item"><span class="material-symbols-outlined">description</span> Templates</div>
-        <div class="link-item"><span class="material-symbols-outlined">note</span> Notebooks</div>
-        <div class="link-item"><span class="material-symbols-outlined">label</span> Tags</div>
+        <div class="link-item" onclick="showTemplates()" style="cursor: pointer;"><span class="material-symbols-outlined">description</span> Templates</div>
+        <div class="link-item" onclick="showTagsModal()" style="cursor: pointer;"><span class="material-symbols-outlined">label</span> Tags</div>
       </div>
 
-      <button class="upgrade-btn">
-        <span class="material-symbols-outlined">stat_3</span> Upgrade
-      </button>
     </aside>
 
     <!-- Main Content -->
     <main class="main-content">
-
-      <h2>Your Home</h2>
       <h3>Notes</h3>
+
+      <!-- Notes Toolbar -->
+      <div class="notes-toolbar" style="
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        padding: 10px;
+        background: rgba(255,255,255,0.05);
+        border-radius: 8px;
+        flex-wrap: wrap;
+        gap: 10px;
+      ">
+        <div class="toolbar-left" style="display: flex; align-items: center; gap: 10px;">
+          <select id="sortSelect" style="
+            background: var(--bg-panel-light);
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+          ">
+            <option value="newest">Newest First</option>
+            <option value="oldest">Oldest First</option>
+            <option value="title">By Title</option>
+            <option value="updated">Recently Updated</option>
+            <option value="tags">By Tags</option>
+          </select>
+          
+          <div id="filterStatus" style="
+            background: var(--primary);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            display: none;
+          ">
+            <!-- Filter status will be shown here -->
+          </div>
+        </div>
+        
+        <div class="toolbar-right" style="display: flex; align-items: center; gap: 10px;">
+          <button onclick="exportNotes()" style="
+            background: var(--accent);
+            color: black;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 500;
+          ">Export</button>
+        </div>
+      </div>
 
       <section id="notesContainer" class="notes-grid">
         <!-- Notes injected from JavaScript -->
@@ -84,8 +121,41 @@
     </div>
   </div>
 
-  <!-- JS -->
-   <script src="../js/main.js"></script>
+  <!-- Templates Modal -->
+  <div id="templatesModal" class="modal hidden">
+    <div class="modal-content">
+      <h3>Note Templates</h3>
+      <div id="templatesContainer" style="max-height: 400px; overflow-y: auto;">
+        <!-- Templates will be injected here -->
+      </div>
+      <div class="modal-actions">
+        <button id="closeTemplatesBtn" class="close-btn">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tags Modal -->
+  <div id="tagsModal" class="modal hidden">
+    <div class="modal-content">
+      <h3>Filter by Tags</h3>
+      <div id="tagsContainer" style="max-height: 400px; overflow-y: auto;">
+        <!-- Tags will be injected here -->
+      </div>
+      <div class="modal-actions">
+        <button id="closeTagsBtn" class="close-btn">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS Modules -->
+  <script src="../js/auth-utils.js"></script>
+  <script src="../js/modules/config.js"></script>
+  <script src="../js/modules/storage.js"></script>
+  <script src="../js/modules/ui.js"></script>
+  <script src="../js/modules/notes.js"></script>
+  <script src="../js/modules/templates.js"></script>
+  <script src="../js/modules/tags.js"></script>
+  <script src="../js/main.js"></script>
 
 </body>
 </html>
