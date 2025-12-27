@@ -1,0 +1,208 @@
+/* Cinematic file viewer styles (uses project's variables when available) */
+@import url("./variables.css");
+
+:root {
+  --cinema-bg-1: rgba(6, 11, 22, 0.8);
+  --cinema-glow: rgba(45, 171, 255, 0.12);
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  font-family: var(--font-sans, "Segoe UI", Roboto, Arial, sans-serif);
+  margin: 24px;
+  background: radial-gradient(
+      1200px 600px at 10% 10%,
+      rgba(58, 128, 255, 0.06),
+      transparent 10%
+    ),
+    linear-gradient(
+      180deg,
+      var(--color-bg-primary, #071029) 0%,
+      var(--color-bg-secondary, #0b1220) 100%
+    );
+  color: var(--color-text-primary, #f8fafc);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 {
+  margin: 0 0 14px 0;
+  font-size: 22px;
+  letter-spacing: 0.2px;
+  color: var(--color-text-primary);
+  text-shadow: 0 6px 20px rgba(10, 20, 40, 0.6);
+}
+
+#controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin: 14px 0;
+}
+#controls button {
+  background: linear-gradient(
+    135deg,
+    var(--color-primary, #2563eb),
+    var(--color-primary-light, #3b82f6)
+  );
+  color: var(--color-text-inverse, #fff);
+  border: 0;
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: var(--shadow-sm);
+}
+#controls button[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+#count {
+  color: var(--color-text-secondary, #cbd5e1);
+  font-size: 13px;
+}
+
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 18px;
+  margin-top: 8px;
+}
+
+.note-card {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.02),
+    rgba(255, 255, 255, 0.01)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 14px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  min-height: 160px;
+  position: relative;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+  border-radius: 12px;
+  overflow: hidden;
+  backdrop-filter: blur(6px);
+}
+.note-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-2xl);
+}
+
+.note-header h4 {
+  margin: 0;
+  color: var(--color-text-primary);
+  font-size: 16px;
+}
+.note-content p {
+  margin: 0;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.note-tags {
+  margin: 12px 0;
+}
+.note-tags span {
+  display: inline-block;
+  margin-right: 8px;
+  margin-bottom: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  color: white;
+  background: linear-gradient(135deg, #2dabff, #4a90e2);
+  box-shadow: 0 6px 18px rgba(45, 171, 255, 0.08);
+}
+
+.note-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
+  color: var(--color-text-tertiary);
+}
+.note-footer .actions {
+  display: flex;
+  gap: 10px;
+}
+.note-footer button {
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 0;
+  cursor: pointer;
+  font-weight: 600;
+}
+.note-footer button[data-action="view"] {
+  background: linear-gradient(135deg, #0ea5e9, #2563eb);
+  color: white;
+}
+.note-footer button[data-action="delete"] {
+  background: linear-gradient(135deg, #ef4444, #c53030);
+  color: white;
+}
+
+#preview {
+  position: fixed;
+  right: 26px;
+  top: 26px;
+  bottom: 26px;
+  width: 38%;
+  background: linear-gradient(
+    180deg,
+    rgba(12, 17, 28, 0.9),
+    rgba(6, 9, 16, 0.95)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  padding: 18px;
+  border-radius: 12px;
+  display: none;
+  box-shadow: 0 30px 80px rgba(2, 6, 23, 0.7);
+  color: var(--color-text-primary);
+}
+#preview h3 {
+  margin: 0 0 12px 0;
+}
+#preview pre {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.02),
+    rgba(255, 255, 255, 0.01)
+  );
+  padding: 12px;
+  border-radius: 10px;
+  overflow: auto;
+}
+
+@media (max-width: 1000px) {
+  #preview {
+    position: fixed;
+    left: 12px;
+    right: 12px;
+    top: 12px;
+    bottom: 12px;
+    width: auto;
+  }
+  .notes-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+  }
+}
+
+/* utilities */
+.small {
+  padding: 6px 10px;
+  font-size: 13px;
+  border-radius: 8px;
+}
+.muted {
+  color: var(--color-text-tertiary);
+}

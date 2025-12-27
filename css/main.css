@@ -223,6 +223,10 @@ body {
   background: var(--bg-panel-light);
   color: white;
 }
+.link-item a{
+  color: inherit;
+  text-decoration: none;
+}
 
 .upgrade-btn {
   margin-top: auto;

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Local Storage Files</title>
+    <link rel="stylesheet" href="../css/file.css" />
+  </head>
+  <body>
+    <h1>Local Storage Viewer</h1>
+    <div id="controls">
+      <input
+        id="searchInputFile"
+        type="search"
+        placeholder="Search notes..."
+        style="
+          padding: 8px 10px;
+          border-radius: 10px;
+          border: 1px solid rgba(255, 255, 255, 0.06);
+          background: transparent;
+          color: inherit;
+          min-width: 220px;
+        "
+      />
+      <button id="reloadBtn">Reload</button>
+      <button id="clearAllBtn">Clear All</button>
+      <span id="count"></span>
+    </div>
+    <section id="notesContainer" class="notes-grid"></section>
+
+    <div id="preview">
+      <h3>Preview</h3>
+      <div id="previewContent"><em>Select an item to preview</em></div>
+      <div style="margin-top: 12px; text-align: right">
+        <button id="closePreview">Close</button>
+      </div>
+    </div>
+
+    <!-- Edit modal removed per request -->
+
+    <script src="../js/modules/storage.js"></script>
+    <script src="../js/modules/ui.js"></script>
+    <script src="../js/file.js"></script>
+  </body>
+</html>
