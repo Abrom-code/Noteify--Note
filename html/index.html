@@ -9,9 +9,10 @@
     <meta name="description"
         content="Noteify is a simple, responsive, and interactive note-taking web application that helps you create, edit, delete, and search notes effortlessly.">
 
-
     <!-- CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
     <link rel="stylesheet" href="../css/index.css">
+    <script type="module" src="../js/firebase-config.js"></script>
 </head>
 
 <body>
@@ -19,18 +20,39 @@
     <header class="main-header">
         <nav class="navbar">
             <a href="index.html" class="logo">Noteify</a>
-            <div class="nav-links">
-                <a href="index.html" class="active">Home</a>
-                <a href="about.html">About</a>
-                <a href="main.html">Notes App</a>
-                <a href="login.html">Login</a>
-                <a href="signup.html">Sign Up</a>
+            
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
+            
+            <div class="nav-right">
+                <div class="nav-links" id="navLinks">
+                    <a href="index.html" class="active">Home</a>
+                    <a href="about.html">About</a>
+                    <a href="main.html">Notes App</a>
+                    <a href="login.html">Login</a>
+                    <a href="signup.html">Sign Up</a>
+                </div>
+                
+                <!-- Theme toggle positioned after nav links -->
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                    <span class="theme-icon">🌙</span>
+                </button>
+            </div>
+        </nav>
         </nav>
     </header>
 
     <!-- Hero Section -->
     <section class="hero">
+        <div class="hero-video">
+            <video autoplay muted loop>
+                <source src="../Static/video/hero-bg.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
         <div class="hero-content">
             <h1>Welcome to Noteify</h1>
             <p>Take notes quickly, manage them effortlessly, and keep them safe locally. Designed for simplicity and

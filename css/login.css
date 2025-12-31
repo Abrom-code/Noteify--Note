@@ -42,6 +42,27 @@
     --spacing-2xl: 3rem;
 }
 
+/* Dark Mode Variables */
+[data-theme="dark"] {
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #2d2d2d;
+    --bg-gradient: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+    --bg-pattern: radial-gradient(circle at 25% 25%, rgba(45, 171, 255, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(116, 75, 162, 0.15) 0%, transparent 50%);
+
+    --text-primary: #ffffff;
+    --text-secondary: #a0aec0;
+    --text-muted: #718096;
+    --text-light: #ffffff;
+
+    --border-color: #4a5568;
+    
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 8px 25px rgba(0, 0, 0, 0.5);
+    --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -50,13 +71,22 @@
 
 body {
     font-family: var(--font-family);
-    background: var(--bg-secondary);
-    background-image: var(--bg-pattern);
+    background: linear-gradient(135deg, rgba(45, 171, 255, 0.9), rgba(116, 75, 162, 0.9)), 
+                url('../Static/image/notetaking.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     color: var(--text-primary);
     line-height: 1.6;
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    transition: background-color var(--transition), color var(--transition);
+}
+
+[data-theme="dark"] body {
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.9), rgba(45, 55, 72, 0.9)), 
+                url('../Static/image/notetaking.png');
 }
 
 /* Enhanced Navigation */
@@ -88,6 +118,34 @@ body {
 
 .navbar .logo:hover {
     transform: scale(1.05);
+}
+
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.nav-toggle span {
+    width: 25px;
+    height: 3px;
+    background: var(--primary-color);
+    margin: 3px 0;
+    transition: var(--transition);
+    border-radius: 2px;
+}
+
+.nav-toggle.active span:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.nav-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-toggle.active span:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
 }
 
 .nav-links {
@@ -131,6 +189,37 @@ body {
 .nav-links a.active {
     color: var(--primary-color);
     font-weight: 600;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    background: var(--bg-secondary);
+    border: 2px solid var(--border-color);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-left: var(--spacing-md);
+}
+
+.theme-toggle:hover {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+.theme-toggle:hover .theme-icon {
+    transform: rotate(180deg);
+}
+
+.theme-icon {
+    font-size: 1.2rem;
+    transition: var(--transition);
+    display: block;
 }
 
 /* Enhanced Login Page Layout */
@@ -323,6 +412,80 @@ input::placeholder {
     font-size: 0.95rem;
 }
 
+/* Social Login Styles */
+.social-divider {
+    display: flex;
+    align-items: center;
+    margin: var(--spacing-xl) 0 var(--spacing-lg) 0;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.social-divider::before,
+.social-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border-color);
+}
+
+.social-divider::before {
+    margin-right: var(--spacing-md);
+}
+
+.social-divider::after {
+    margin-left: var(--spacing-md);
+}
+
+.social-login {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
+}
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    text-decoration: none;
+}
+
+.social-btn:hover {
+    border-color: var(--primary-color);
+    background-color: rgba(45, 171, 255, 0.05);
+    transform: translateY(-1px);
+}
+
+.google-btn:hover {
+    border-color: #4285F4;
+    background-color: rgba(66, 133, 244, 0.05);
+}
+
+.github-btn:hover {
+    border-color: #333;
+    background-color: rgba(51, 51, 51, 0.05);
+}
+
+[data-theme="dark"] .social-btn {
+    background: var(--bg-secondary);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .social-btn:hover {
+    background: var(--bg-primary);
+}
+
 /* Enhanced Footer */
 .login-footer {
     background: var(--bg-primary);
@@ -434,6 +597,42 @@ input::placeholder {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    .navbar {
+        padding: var(--spacing-md) var(--spacing-lg);
+    }
+
+    .nav-toggle {
+        display: flex;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 70px;
+        right: -100%;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(10px);
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding-top: var(--spacing-2xl);
+        transition: var(--transition);
+        border-left: 1px solid var(--border-color);
+    }
+
+    .nav-links.active {
+        right: 0;
+    }
+
+    .nav-links a {
+        padding: var(--spacing-lg) var(--spacing-xl);
+        font-size: var(--font-size-lg);
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid var(--border-color);
+    }
+
     .login-container {
         padding: var(--spacing-lg);
     }
@@ -444,10 +643,6 @@ input::placeholder {
 
     .login-header h1 {
         font-size: 2rem;
-    }
-
-    .navbar {
-        padding: var(--spacing-md) var(--spacing-lg);
     }
 
     .footer-links {
@@ -486,6 +681,7 @@ a:focus {
     outline: 2px solid var(--primary-color);
     outline-offset: 2px;
 }
+/* User Menu Styles */
 .user-menu {
     position: relative;
 }
@@ -498,11 +694,8 @@ a:focus {
     border-radius: 20px;
     cursor: pointer;
     font-weight: 500;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    transition: var(--transition);
     font-size: 14px;
+    transition: var(--transition);
 }
 
 .user-menu-btn:hover {

@@ -1,8 +1,9 @@
+// Authentication utilities
 function getCurrentUser() {
     try {
         const userStr = localStorage.getItem('currentUser');
         return userStr ? JSON.parse(userStr) : null;
-    } catch (error) {
+    } catch {
         return null;
     }
 }
@@ -20,6 +21,9 @@ function updateNavigationForAuth() {
     }
 }
 
+// Make updateNavigationForAuth globally available
+window.updateNavigationForAuth = updateNavigationForAuth;
+
 function updateNavigationForLoggedInUser(navLinks, user) {
     const currentPage = window.location.pathname.split('/').pop();
     
@@ -27,54 +31,13 @@ function updateNavigationForLoggedInUser(navLinks, user) {
         <a href="index.html" ${currentPage === 'index.html' ? 'class="active"' : ''}>Home</a>
         <a href="about.html" ${currentPage === 'about.html' ? 'class="active"' : ''}>About</a>
         <a href="main.html" ${currentPage === 'main.html' ? 'class="active"' : ''}>My Notes</a>
-        <div class="user-menu" style="position: relative;">
-            <button class="user-menu-btn" style="
-                background: linear-gradient(135deg, #2dabff, #4a90e2);
-                color: white;
-                border: none;
-                padding: 8px 16px;
-                border-radius: 20px;
-                cursor: pointer;
-                font-weight: 500;
-                display: flex;
-                align-items: center;
-                gap: 6px;
-            ">
-                <span>Hi, ${user.name}</span>
-                <span style="font-size: 12px;">▼</span>
+        <div class="user-menu">
+            <button class="user-menu-btn">
+                Hi, ${user.name} ▼
             </button>
-            <div class="user-dropdown" style="
-                position: absolute;
-                top: 100%;
-                right: 0;
-                background: white;
-                border: 1px solid #e9ecef;
-                border-radius: 8px;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-                min-width: 150px;
-                display: none;
-                z-index: 1000;
-                margin-top: 5px;
-            ">
-                <a href="main.html" style="
-                    display: block;
-                    padding: 12px 16px;
-                    text-decoration: none;
-                    color: #2c3e50;
-                    border-bottom: 1px solid #f8f9fa;
-                    transition: background-color 0.2s;
-                " onmouseover="this.style.backgroundColor='#f8f9fa'" onmouseout="this.style.backgroundColor='transparent'">
-                    My Notes
-                </a>
-                <a href="#" onclick="logout()" style="
-                    display: block;
-                    padding: 12px 16px;
-                    text-decoration: none;
-                    color: #dc3545;
-                    transition: background-color 0.2s;
-                " onmouseover="this.style.backgroundColor='#f8f9fa'" onmouseout="this.style.backgroundColor='transparent'">
-                    Logout
-                </a>
+            <div class="user-dropdown">
+                <a href="main.html">My Notes</a>
+                <a href="#" onclick="logout()">Logout</a>
             </div>
         </div>
     `;
@@ -88,7 +51,6 @@ function updateNavigationForGuestUser(navLinks) {
     navLinks.innerHTML = `
         <a href="index.html" ${currentPage === 'index.html' ? 'class="active"' : ''}>Home</a>
         <a href="about.html" ${currentPage === 'about.html' ? 'class="active"' : ''}>About</a>
-        <a href="main.html" ${currentPage === 'main.html' ? 'class="active"' : ''}>Notes App</a>
         <a href="login.html" ${currentPage === 'login.html' ? 'class="active"' : ''}>Login</a>
         <a href="signup.html" ${currentPage === 'signup.html' ? 'class="active"' : ''}>Sign Up</a>
     `;
@@ -99,68 +61,63 @@ function setupUserMenuEvents() {
     const userDropdown = document.querySelector('.user-dropdown');
     
     if (userMenuBtn && userDropdown) {
-        userMenuBtn.addEventListener('click', function(e) {
+        userMenuBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             userDropdown.style.display = userDropdown.style.display === 'block' ? 'none' : 'block';
         });
         
-        document.addEventListener('click', function() {
+        document.addEventListener('click', () => {
             userDropdown.style.display = 'none';
         });
     }
 }
 
-function logout() {
+async function logout() {
     if (confirm('Are you sure you want to logout?')) {
-        localStorage.removeItem('currentUser');
-        showNotification('Logged out successfully!', 'success');
-        
-        setTimeout(() => {
-            window.location.href = 'index.html';
-        }, 1000);
+        try {
+            // Use the global logout function
+            if (window.performLogout) {
+                await window.performLogout();
+            } else {
+                // Fallback if global function not available
+                localStorage.removeItem('currentUser');
+            }
+            
+            showNotification('Logged out successfully!', 'success');
+            
+            // Force navigation update
+            updateNavigationForAuth();
+            
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 1000);
+        } catch (error) {
+            console.error('Logout error:', error);
+            localStorage.removeItem('currentUser');
+            showNotification('Logged out successfully!', 'success');
+            setTimeout(() => window.location.href = 'index.html', 1000);
+        }
     }
 }
 
 function showNotification(message, type = 'info') {
     const notification = document.createElement('div');
     notification.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        padding: 12px 20px;
-        border-radius: 8px;
-        color: white;
-        font-weight: 500;
-        z-index: 10000;
-        max-width: 300px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        transform: translateX(100%);
-        transition: transform 0.3s ease;
-        font-size: 14px;
+        position: fixed; top: 20px; right: 20px; padding: 12px 20px;
+        border-radius: 8px; color: white; font-weight: 500; z-index: 10000;
+        max-width: 300px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        transform: translateX(100%); transition: transform 0.3s ease;
     `;
     
-    const colors = {
-        success: '#28a745',
-        error: '#dc3545',
-        warning: '#ffc107',
-        info: '#17a2b8'
-    };
+    const colors = { success: '#28a745', error: '#dc3545', warning: '#ffc107', info: '#17a2b8' };
     notification.style.backgroundColor = colors[type] || colors.info;
     notification.textContent = message;
     
     document.body.appendChild(notification);
-    
-    setTimeout(() => {
-        notification.style.transform = 'translateX(0)';
-    }, 100);
-    
+    setTimeout(() => notification.style.transform = 'translateX(0)', 100);
     setTimeout(() => {
         notification.style.transform = 'translateX(100%)';
-        setTimeout(() => {
-            if (notification.parentNode) {
-                notification.parentNode.removeChild(notification);
-            }
-        }, 300);
+        setTimeout(() => notification.remove(), 300);
     }, 3000);
 }
 
@@ -173,7 +130,9 @@ function redirectIfLoggedIn() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async () => {
+    // Wait a bit for Firebase to initialize
+    await new Promise(resolve => setTimeout(resolve, 500));
     updateNavigationForAuth();
     redirectIfLoggedIn();
 });

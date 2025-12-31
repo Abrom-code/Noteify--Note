@@ -258,28 +258,7 @@ function renderEmptyState() {
   notesContainer.innerHTML = `
         <div style="text-align: center; padding: 40px; color: #666;">
             <h3>No notes yet</h3>
-            <p>Click "Add Note" to create your first note, or try a template!</p>
-            <div style="margin-top: 20px;">
-                <button onclick="openNewNoteModal()" style="
-                    background: #2dabff; 
-                    color: white; 
-                    border: none; 
-                    padding: 10px 20px; 
-                    border-radius: 6px; 
-                    cursor: pointer; 
-                    margin-right: 10px;
-                    font-size: 14px;
-                ">Create Note</button>
-                <button onclick="showTemplates()" style="
-                    background: #28a745; 
-                    color: white; 
-                    border: none; 
-                    padding: 10px 20px; 
-                    border-radius: 6px; 
-                    cursor: pointer; 
-                    font-size: 14px;
-                ">Use Template</button>
-            </div>
+            <p>Click "Add Note" in the sidebar to create your first note!</p>
         </div>
     `;
 }
@@ -430,18 +409,34 @@ function exportNotes() {
   UIManager.showNotification("Notes exported successfully!", "success");
 }
 
-function logout() {
+async function logout() {
   if (confirm("Are you sure you want to logout?")) {
-    // Save scratch pad before logout
-    if (scratchPad) {
-      StorageManager.saveScratchPad(currentUser.id, scratchPad.value);
+    try {
+      // Save scratch pad before logout
+      if (scratchPad) {
+        StorageManager.saveScratchPad(currentUser.id, scratchPad.value);
+      }
+      
+      // Use the global Firebase logout function
+      if (window.performLogout) {
+        await window.performLogout();
+      } else {
+        // Fallback if global function not available
+        StorageManager.removeCurrentUser();
+      }
+
+      UIManager.showNotification("Logged out successfully!", "success");
+
+      setTimeout(() => {
+        window.location.href = "index.html";
+      }, 1000);
+      
+    } catch (error) {
+      console.error('Main page logout error:', error);
+      // Even if Firebase logout fails, remove from localStorage
+      StorageManager.removeCurrentUser();
+      UIManager.showNotification("Logged out successfully!", "success");
+      setTimeout(() => window.location.href = "index.html", 1000);
     }
-
-    StorageManager.removeCurrentUser();
-    UIManager.showNotification("Logged out successfully!", "success");
-
-    setTimeout(() => {
-      window.location.href = "login.html";
-    }, 1000);
   }
 }
