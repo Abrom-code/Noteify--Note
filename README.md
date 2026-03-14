@@ -8,8 +8,11 @@
 Built with a polished **frontend experience** and a scalable **PHP-powered backend** for real-world note management, productivity, and future-ready notification support.
 
 [![Status](https://img.shields.io/badge/status-active-success)](#)
+
 [![Frontend](https://img.shields.io/badge/frontend-HTML%20%7C%20CSS%20%7C%20JavaScript-blue)](#)
+
 [![Backend](https://img.shields.io/badge/backend-PHP%20%7C%20MySQL-purple)](#)
+
 [![License](https://img.shields.io/badge/license-MIT-green)](#)
 
 </div>
