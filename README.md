@@ -1,4 +1,4 @@
-#  Noteify — Professional Full-Stack Notes Application
+#  Noteify — Full-Stack Notes Application
 
 <div align="center">
 
