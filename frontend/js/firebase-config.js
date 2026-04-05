@@ -1,13 +1,13 @@
 // Shared Firebase Configuration
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-import { 
-    getAuth, 
-    signInWithEmailAndPassword, 
-    signInWithPopup, 
+import {
+    getAuth,
+    signInWithEmailAndPassword,
+    signInWithPopup,
     signOut,
-    GoogleAuthProvider, 
+    GoogleAuthProvider,
     GithubAuthProvider,
-    onAuthStateChanged 
+    onAuthStateChanged
 } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
 
 const firebaseConfig = {
@@ -35,12 +35,9 @@ window.onAuthStateChanged = onAuthStateChanged;
 // Global auth state listener
 let isLoggingOut = false;
 
-onAuthStateChanged(auth, (user) => {
-    if (isLoggingOut) {
-        // Don't update localStorage during logout process
-        return;
-    }
-    
+onAuthStateChanged(auth, async (user) => {
+    if (isLoggingOut) return;
+
     if (user) {
         const userData = {
             id: user.uid,
@@ -50,26 +47,35 @@ onAuthStateChanged(auth, (user) => {
             provider: user.providerData[0]?.providerId || 'email'
         };
         localStorage.setItem('currentUser', JSON.stringify(userData));
+
+        // Sync user to PHP backend and get a session token
+        if (window.NoteifyAPI) {
+            try {
+                await window.NoteifyAPI.syncUser(user);
+            } catch (e) {
+                console.warn('Backend sync failed (offline?):', e.message);
+            }
+        }
     } else {
         localStorage.removeItem('currentUser');
     }
-    
-    // Update navigation if auth-utils is available
+
     if (window.updateNavigationForAuth) {
         window.updateNavigationForAuth();
     }
 });
 
 // Global logout function
-window.performLogout = async function() {
+window.performLogout = async function () {
     isLoggingOut = true;
     try {
+        // Invalidate PHP session token
+        if (window.NoteifyAPI) {
+            await window.NoteifyAPI.logoutBackend().catch(() => { });
+        }
         await signOut(auth);
         localStorage.removeItem('currentUser');
-        
-        // Small delay to ensure Firebase processes the logout
         await new Promise(resolve => setTimeout(resolve, 100));
-        
         isLoggingOut = false;
         return true;
     } catch (error) {
