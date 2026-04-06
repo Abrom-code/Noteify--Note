@@ -25,7 +25,7 @@ if (empty($email) || empty($password)) {
 
 $conn = getConnection();
 
-$stmt = $conn->prepare('SELECT id, name, email, password FROM users WHERE email = ?');
+$stmt = $conn->prepare('SELECT id, name, email, password, avatar FROM users WHERE email = ?');
 $stmt->bind_param('s', $email);
 $stmt->execute();
 $user = $stmt->get_result()->fetch_assoc();
@@ -54,5 +54,5 @@ echo json_encode([
     'success'    => true,
     'token'      => $token,
     'expires_at' => $expires_at,
-    'user'       => ['id' => $user['id'], 'name' => $user['name'], 'email' => $user['email']]
+    'user'       => ['id' => $user['id'], 'name' => $user['name'], 'email' => $user['email'], 'avatar' => $user['avatar']]
 ]);

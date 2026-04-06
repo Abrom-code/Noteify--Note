@@ -84,5 +84,5 @@ echo json_encode([
     'success'    => true,
     'token'      => $token,
     'expires_at' => $expires_at,
-    'user'       => ['id' => $user_id, 'name' => $name, 'email' => $email]
+    'user'       => ['id' => $user_id, 'name' => $name, 'email' => $email, 'avatar' => null]
 ]);

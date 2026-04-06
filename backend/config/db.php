@@ -2,7 +2,7 @@
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'noteify_db');
 define('DB_USER', 'root');
-define('DB_PASS', 'your_mysql_root_password_here');
+define('DB_PASS', '');
 define('DB_CHARSET', 'utf8mb4');
 
 function getConnection() {
