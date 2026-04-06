@@ -120,5 +120,24 @@ const NoteifyAPI = {
             body: JSON.stringify({ id })
         });
         return this._json(res);
+    },
+
+    // ── Profile ───────────────────────────────────────────────────────────
+
+    async updateProfile({ name, email, password, avatar } = {}) {
+        const body = {};
+        if (name     !== undefined) body.name     = name;
+        if (email    !== undefined) body.email    = email;
+        if (password !== undefined) body.password = password;
+        if (avatar   !== undefined) body.avatar   = avatar;
+
+        const res = await fetch(`${API_BASE}/auth/update_profile.php`, {
+            method: 'POST', headers: this._headers(),
+            body: JSON.stringify(body)
+        });
+        const data = await this._json(res);
+        // Keep localStorage in sync
+        localStorage.setItem('currentUser', JSON.stringify(data.user));
+        return data.user;
     }
 };
